@@ -1,0 +1,13 @@
+$primary: #6d5dfc;
+// $primary--dark: #5b0eeb;
+// $primary--light: #8abdff;
+
+$gray--first: #e4ebf5;
+$gray--second: #c8d0e7;
+$gray--third: #9baacf;
+
+$shadow--first: 0.3rem 0.3rem 0.6rem $gray--first, -0.2rem -0.2rem 0.5rem white;
+$shadow--second: 0.8rem 0.8rem 1.4rem $gray--second,
+  -0.2rem -0.2rem 1.8rem white;
+
+$font: "Poppins", sans-serif;

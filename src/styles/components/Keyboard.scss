@@ -1,0 +1,41 @@
+@import "styles/variables";
+
+.keyboard {
+  .react-simple-keyboard {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    background-color: $gray--first;
+    box-shadow: $shadow--second;
+    border-radius: 40px;
+    width: 90%;
+    max-width: 1160px;
+    .hg-row {
+      margin-bottom: 10px;
+    }
+    .hg-button {
+      box-shadow: $shadow--first;
+      color: $gray--third;
+      background-color: $gray--first;
+      border-radius: 50%;
+      height: 60px;
+      width: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: unset;
+      border-bottom: 1px solid $gray--second;
+      margin-right: 16px;
+      &:last-child {
+        margin-right: 0;
+      }
+      * {
+        font-family: $font !important;
+      }
+    }
+    .hg-functionBtn {
+      width: 100px;
+      border-radius: 20px;
+    }
+  }
+}
