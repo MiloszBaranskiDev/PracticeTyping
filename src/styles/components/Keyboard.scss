@@ -26,12 +26,19 @@
       flex-grow: unset;
       border-bottom: 1px solid $gray--second;
       margin-right: 16px;
+      transition: 0.1s ease;
       &:last-child {
         margin-right: 0;
       }
       * {
         font-family: $font !important;
       }
+    }
+    .currentKey {
+      background-color: $primary;
+      box-shadow: inset 0.2rem 0.2rem 1rem $primary--light,
+        inset -0.2rem -0.2rem 1rem $primary--dark, $shadow--first;
+      color: $gray--first;
     }
     .hg-functionBtn {
       width: 100px;
