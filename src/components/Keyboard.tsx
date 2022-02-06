@@ -14,7 +14,7 @@ const Keyboard: React.FC = () => {
     rows.forEach((row) => {
       const rowItems = row.childNodes;
       rowItems.forEach((rowItem) => {
-        updateKeys((oldArr: [HTMLDivElement] | []) => [...oldArr, rowItem]);
+        updateKeys((oldArr: HTMLDivElement[] | []) => [...oldArr, rowItem]);
       });
     });
   };
@@ -37,7 +37,6 @@ const Keyboard: React.FC = () => {
 
   return (
     <div className="keyboard">
-      <p>Keyboard</p>
       <Keys onInit={(keyboard: any) => initKeysHandler(keyboard)} />
     </div>
   );
