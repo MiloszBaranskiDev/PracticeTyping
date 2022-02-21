@@ -2,16 +2,16 @@ import React from "react";
 import { loremIpsum } from "../LoremIpsum";
 import "styles/components/Text.scss";
 
-interface TextProps {
+interface Props {
   letterIndex: number;
 }
 
-const Text: React.FC<TextProps> = ({ letterIndex }) => {
+const Text: React.FC<Props> = ({ letterIndex }) => {
   const currentText = loremIpsum[0];
   const words = currentText.split(" ");
 
   let wordIndex = 0;
-  // let letterIndex = 0;
+  // console.log(letterIndex);
 
   return (
     <div className="text">

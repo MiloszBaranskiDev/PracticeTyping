@@ -3,7 +3,12 @@ import Keys from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 import "styles/components/Keyboard.scss";
 
-const Keyboard: React.FC = () => {
+interface Props {
+  letterIndex: number;
+  updateLetterIndex: (letterIndex: number) => void;
+}
+
+const Keyboard: React.FC<Props> = ({ letterIndex, updateLetterIndex }) => {
   const [keys, updateKeys] = useState<any>([]);
 
   const initKeysHandler = (keys: {
@@ -19,7 +24,7 @@ const Keyboard: React.FC = () => {
     });
   };
 
-  window.addEventListener("keydown", (e: { key: string }) => {
+  window.addEventListener("keyup", (e: { key: string }) => {
     const keysStrings: string[] = [];
     keys.forEach((key: HTMLDivElement) => {
       keysStrings.push(key.innerText);
@@ -32,6 +37,8 @@ const Keyboard: React.FC = () => {
       setTimeout(() => {
         keys[currentKey].classList.remove("currentKey");
       }, 100);
+
+      // updateLetterIndex(letterIndex + 1);
     }
   });
 
