@@ -11,7 +11,10 @@ const Text: React.FC<Props> = ({ letterIndex }) => {
   const words = currentText.split(" ");
 
   let wordIndex = 0;
-  // console.log(letterIndex);
+
+  if (words[wordIndex].length <= letterIndex) {
+    wordIndex++;
+  }
 
   return (
     <div className="text">
