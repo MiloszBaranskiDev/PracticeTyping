@@ -8,11 +8,8 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <Text letterIndex={letterIndex} />
-      <Keyboard
-        letterIndex={letterIndex}
-        updateLetterIndex={updateLetterIndex}
-      />
+      <Text letterIndex={letterIndex} updateLetterIndex={updateLetterIndex} />
+      <Keyboard updateLetterIndex={updateLetterIndex} />
     </div>
   );
 };

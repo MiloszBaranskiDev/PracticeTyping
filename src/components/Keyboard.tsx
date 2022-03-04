@@ -4,11 +4,10 @@ import "react-simple-keyboard/build/css/index.css";
 import "styles/components/Keyboard.scss";
 
 interface Props {
-  letterIndex: number;
   updateLetterIndex: (prevLetterIndex: any) => void;
 }
 
-const Keyboard: React.FC<Props> = ({ letterIndex, updateLetterIndex }) => {
+const Keyboard: React.FC<Props> = ({ updateLetterIndex }) => {
   const [keys, updateKeys] = useState<any>([]);
 
   const initKeysHandler = (keys: {
@@ -19,7 +18,6 @@ const Keyboard: React.FC<Props> = ({ letterIndex, updateLetterIndex }) => {
 
     rows.forEach((row) => {
       const rowItems = row.childNodes;
-
       rowItems.forEach((rowItem) => {
         updateKeys((oldArr: HTMLDivElement[] | []) => [...oldArr, rowItem]);
       });
@@ -29,7 +27,6 @@ const Keyboard: React.FC<Props> = ({ letterIndex, updateLetterIndex }) => {
   useEffect(() => {
     window.addEventListener("keyup", (e: { key: string }) => {
       const keysStrings: string[] = [];
-
       keys.forEach((key: HTMLDivElement) => {
         keysStrings.push(key.innerText);
         key.classList.remove("currentKey");
@@ -38,7 +35,6 @@ const Keyboard: React.FC<Props> = ({ letterIndex, updateLetterIndex }) => {
       const currentKey: number = keysStrings.indexOf(e.key);
       if (currentKey !== -1) {
         keys[currentKey].classList.add("currentKey");
-
         setTimeout(() => {
           keys[currentKey].classList.remove("currentKey");
         }, 100);
@@ -46,7 +42,7 @@ const Keyboard: React.FC<Props> = ({ letterIndex, updateLetterIndex }) => {
 
       updateLetterIndex((prevLetterIndex: any) => prevLetterIndex + 1);
     });
-  }, []);
+  }, [keys]);
 
   return (
     <div className="keyboard">
