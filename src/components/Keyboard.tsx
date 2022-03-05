@@ -15,7 +15,6 @@ const Keyboard: React.FC<Props> = ({ updateLetterIndex }) => {
     keyboardRowsDOM: HTMLDivElement;
   }) => {
     const rows = keys.keyboardRowsDOM.childNodes;
-
     rows.forEach((row) => {
       const rowItems = row.childNodes;
       rowItems.forEach((rowItem) => {
@@ -41,6 +40,7 @@ const Keyboard: React.FC<Props> = ({ updateLetterIndex }) => {
       }
 
       updateLetterIndex((prevLetterIndex: any) => prevLetterIndex + 1);
+      console.log("click");
     });
   }, [keys]);
 

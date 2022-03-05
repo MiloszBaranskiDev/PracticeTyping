@@ -22,8 +22,11 @@ const Text: React.FC<Props> = ({ letterIndex, updateLetterIndex }) => {
     }
   }, [letterIndex]);
 
-  console.log("word", wordIndex);
-  console.log("letter:", letterIndex);
+  if (letterIndex > words[wordIndex].length) {
+    console.log("end");
+  }
+
+  // console.log(letterIndex);
 
   return (
     <div className="text">

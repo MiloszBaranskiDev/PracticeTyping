@@ -10,3 +10,15 @@ body {
   font-family: $font;
   background-color: $gray--first;
 }
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 1200px;
+  min-height: 100vh;
+  padding: 20px;
+  margin: 0 auto;
+}

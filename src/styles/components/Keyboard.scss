@@ -1,6 +1,7 @@
 @import "styles/variables";
 
 .keyboard {
+  width: 100%;
   .react-simple-keyboard {
     margin-left: auto;
     margin-right: auto;
@@ -8,8 +9,7 @@
     background-color: $gray--first;
     box-shadow: $shadow--second;
     border-radius: 40px;
-    width: 90%;
-    max-width: 1160px;
+    width: 100%;
     .hg-row {
       margin-bottom: 10px;
     }

@@ -3,14 +3,16 @@
 .text {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 40px;
   &__word {
     display: inline;
-    font-size: 24px;
+    font-size: 32px;
     letter-spacing: 2px;
     color: $gray--third;
     &--active {
       .text__letter--active {
-        border-bottom: 2px solid $primary;
+        border-bottom: 3px solid $primary;
       }
     }
   }
