@@ -9,6 +9,7 @@ interface Props {
 
 const Keyboard: React.FC<Props> = ({ updateLetterIndex }) => {
   const [keys, updateKeys] = useState<any>([]);
+  const [keysStrings, updateKeysStrings] = useState<string[] | null>(null);
 
   const initKeysHandler = (keys: {
     keys: object;
@@ -24,25 +25,33 @@ const Keyboard: React.FC<Props> = ({ updateLetterIndex }) => {
   };
 
   useEffect(() => {
-    window.addEventListener("keyup", (e: { key: string }) => {
-      const keysStrings: string[] = [];
+    if (keys.length > 0) {
+      const arr: string[] = [];
       keys.forEach((key: HTMLDivElement) => {
-        keysStrings.push(key.innerText);
-        key.classList.remove("currentKey");
+        arr.push(key.innerText);
       });
-
-      const currentKey: number = keysStrings.indexOf(e.key);
-      if (currentKey !== -1) {
-        keys[currentKey].classList.add("currentKey");
-        setTimeout(() => {
-          keys[currentKey].classList.remove("currentKey");
-        }, 100);
-      }
-
-      updateLetterIndex((prevLetterIndex: any) => prevLetterIndex + 1);
-      console.log("click");
-    });
+      updateKeysStrings(arr);
+    }
   }, [keys]);
+
+  useEffect(() => {
+    window.addEventListener("keyup", (e: { key: string }) => {
+      if (keysStrings !== null) {
+        const clickedKeyIndex: number = keysStrings.indexOf(e.key);
+        updateLetterIndex((prevLetterIndex: any) => prevLetterIndex + 1);
+        keyAnimation(clickedKeyIndex);
+      }
+    });
+  }, [keysStrings]);
+
+  const keyAnimation = (index: number) => {
+    if (index !== -1) {
+      keys[index].classList.add("currentKey");
+      setTimeout(() => {
+        keys[index].classList.remove("currentKey");
+      }, 100);
+    }
+  };
 
   return (
     <div className="keyboard">
