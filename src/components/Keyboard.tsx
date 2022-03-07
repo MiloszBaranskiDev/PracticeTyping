@@ -4,10 +4,14 @@ import "react-simple-keyboard/build/css/index.css";
 import "styles/components/Keyboard.scss";
 
 interface Props {
+  updateClickedLetter: (arg0: string) => void;
   updateLetterIndex: (prevLetterIndex: any) => void;
 }
 
-const Keyboard: React.FC<Props> = ({ updateLetterIndex }) => {
+const Keyboard: React.FC<Props> = ({
+  updateClickedLetter,
+  updateLetterIndex,
+}) => {
   const [keys, updateKeys] = useState<any>([]);
   const [keysStrings, updateKeysStrings] = useState<string[] | null>(null);
 
@@ -36,10 +40,14 @@ const Keyboard: React.FC<Props> = ({ updateLetterIndex }) => {
 
   useEffect(() => {
     window.addEventListener("keyup", (e: { key: string }) => {
-      if (keysStrings !== null) {
+      if (keysStrings !== null && e.key.length === 1 && e.key.match(/[a-z]/i)) {
         const clickedKeyIndex: number = keysStrings.indexOf(e.key);
         updateLetterIndex((prevLetterIndex: any) => prevLetterIndex + 1);
         keyAnimation(clickedKeyIndex);
+        updateClickedLetter(e.key.toLowerCase());
+
+        // fix the problem with not updating the state when the key is the same as the previous one
+        updateClickedLetter("");
       }
     });
   }, [keysStrings]);

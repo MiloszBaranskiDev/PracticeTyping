@@ -3,11 +3,16 @@ import { loremIpsum } from "../LoremIpsum";
 import "styles/components/Text.scss";
 
 interface Props {
+  clickedLetter: string | null;
   letterIndex: number;
   updateLetterIndex: (arg0: number) => void;
 }
 
-const Text: React.FC<Props> = ({ letterIndex, updateLetterIndex }) => {
+const Text: React.FC<Props> = ({
+  clickedLetter,
+  letterIndex,
+  updateLetterIndex,
+}) => {
   const currentText = loremIpsum[0];
   const words = currentText.split(" ");
   const [wordIndex, updateWordIndex] = useState<number>(0);
@@ -26,7 +31,16 @@ const Text: React.FC<Props> = ({ letterIndex, updateLetterIndex }) => {
     console.log("end");
   }
 
-  // console.log(letterIndex);
+  useEffect(() => {
+    if (clickedLetter !== null && clickedLetter !== "") {
+      const letters = Array.from(words[wordIndex]);
+      if (letters[letterIndex - 1].toLowerCase() === clickedLetter) {
+        console.log("correct letter");
+      } else {
+        console.log("incorrect letter");
+      }
+    }
+  }, [clickedLetter]);
 
   return (
     <div className="text">
