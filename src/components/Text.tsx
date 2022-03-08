@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { loremIpsum } from "../LoremIpsum";
 import "styles/components/Text.scss";
 
@@ -14,6 +14,7 @@ const Text: React.FC<Props> = ({
   updateLetterIndex,
 }) => {
   const currentText = loremIpsum[0];
+  const currentWord = useRef(null as any);
   const words = currentText.split(" ");
   const [wordIndex, updateWordIndex] = useState<number>(0);
 
@@ -34,10 +35,13 @@ const Text: React.FC<Props> = ({
   useEffect(() => {
     if (clickedLetter !== null && clickedLetter !== "") {
       const letters = Array.from(words[wordIndex]);
+      const previousLetterSpan =
+        currentWord.current.childNodes[letterIndex - 1];
+
       if (letters[letterIndex - 1].toLowerCase() === clickedLetter) {
-        console.log("correct letter");
+        previousLetterSpan.classList.add("text__letter--correct");
       } else {
-        console.log("incorrect letter");
+        previousLetterSpan.classList.add("text__letter--incorrect");
       }
     }
   }, [clickedLetter]);
@@ -47,6 +51,7 @@ const Text: React.FC<Props> = ({
       {words.map((word, i) => (
         <div
           key={word + i}
+          ref={wordIndex === Number(i) ? currentWord : null}
           className={`text__word${
             wordIndex === Number(i) ? " text__word--active" : ""
           }`}

@@ -17,5 +17,12 @@
     }
   }
   &__letter {
+    transition: color 0.25s;
+    &--incorrect {
+      color: #c23616;
+    }
+    &--correct {
+      color: $primary;
+    }
   }
 }
