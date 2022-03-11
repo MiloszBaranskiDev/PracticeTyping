@@ -10,11 +10,6 @@
     font-size: 32px;
     letter-spacing: 2px;
     color: $gray--third;
-    &--active {
-      .text__letter--active {
-        border-bottom: 3px solid $primary;
-      }
-    }
   }
   &__letter {
     transition: color 0.25s;

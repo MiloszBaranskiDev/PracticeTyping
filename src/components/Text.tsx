@@ -23,7 +23,7 @@ const Text: React.FC<Props> = ({
       words[wordIndex].length <= letterIndex &&
       words.length - 1 > wordIndex
     ) {
-      updateWordIndex((prevWordIndex: any) => prevWordIndex + 1);
+      updateWordIndex((prevWordIndex: number) => prevWordIndex + 1);
       updateLetterIndex(0);
     }
   }, [letterIndex]);
@@ -34,11 +34,20 @@ const Text: React.FC<Props> = ({
 
   useEffect(() => {
     if (clickedLetter !== null && clickedLetter !== "") {
-      const letters = Array.from(words[wordIndex]);
-      const previousLetterSpan =
-        currentWord.current.childNodes[letterIndex - 1];
+      let index = letterIndex - 1;
+      let letters = Array.from(words[wordIndex]);
+      let previousLetterSpan = currentWord.current.childNodes[index];
 
-      if (letters[letterIndex - 1].toLowerCase() === clickedLetter) {
+      if (letters[letterIndex - 1] === undefined) {
+        letters = Array.from(words[wordIndex - 1]);
+        index = letterIndex;
+        previousLetterSpan =
+          currentWord.current.parentNode.childNodes[wordIndex - 1].childNodes[
+            words[wordIndex - 1].length - 1
+          ];
+      }
+
+      if (letters[index].toLowerCase() === clickedLetter) {
         previousLetterSpan.classList.add("text__letter--correct");
       } else {
         previousLetterSpan.classList.add("text__letter--incorrect");
@@ -52,17 +61,10 @@ const Text: React.FC<Props> = ({
         <div
           key={word + i}
           ref={wordIndex === Number(i) ? currentWord : null}
-          className={`text__word${
-            wordIndex === Number(i) ? " text__word--active" : ""
-          }`}
+          className="text__word"
         >
           {Array.from(word).map((letter, i) => (
-            <span
-              key={letter + i}
-              className={`text__letter${
-                letterIndex === Number(i) ? " text__letter--active" : ""
-              }`}
-            >
+            <span key={letter + i} className="text__letter">
               {letter}
             </span>
           ))}
