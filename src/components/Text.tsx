@@ -13,9 +13,9 @@ const Text: React.FC<Props> = ({
   letterIndex,
   updateLetterIndex,
 }) => {
-  const currentText = loremIpsum[0];
-  const currentWord = useRef(null as any);
-  const words = currentText.split(" ");
+  const currentText: string = loremIpsum[0];
+  const currentWordDiv = useRef(null as any);
+  const words: string[] = currentText.split(" ");
   const [wordIndex, updateWordIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -28,23 +28,26 @@ const Text: React.FC<Props> = ({
     }
   }, [letterIndex]);
 
-  if (letterIndex > words[wordIndex].length) {
+  if (
+    wordIndex === words.length - 1 &&
+    letterIndex === words[wordIndex].length
+  ) {
     console.log("end");
   }
 
   useEffect(() => {
     if (clickedLetter !== null && clickedLetter !== "") {
-      let index = letterIndex - 1;
-      let letters = Array.from(words[wordIndex]);
-      let previousLetterSpan = currentWord.current.childNodes[index];
+      let index: number = letterIndex - 1;
+      let letters: string[] = Array.from(words[wordIndex]);
+      let previousLetterSpan: HTMLSpanElement =
+        currentWordDiv.current.childNodes[index];
 
       if (letters[letterIndex - 1] === undefined) {
         letters = Array.from(words[wordIndex - 1]);
-        index = letterIndex;
+        index = letters.length - 1;
         previousLetterSpan =
-          currentWord.current.parentNode.childNodes[wordIndex - 1].childNodes[
-            words[wordIndex - 1].length - 1
-          ];
+          currentWordDiv.current.parentNode.childNodes[wordIndex - 1]
+            .childNodes[words[wordIndex - 1].length - 1];
       }
 
       if (letters[index].toLowerCase() === clickedLetter) {
@@ -60,7 +63,7 @@ const Text: React.FC<Props> = ({
       {words.map((word, i) => (
         <div
           key={word + i}
-          ref={wordIndex === Number(i) ? currentWord : null}
+          ref={wordIndex === Number(i) ? currentWordDiv : null}
           className="text__word"
         >
           {Array.from(word).map((letter, i) => (
