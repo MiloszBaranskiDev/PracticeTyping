@@ -1,4 +1,5 @@
 export const loremIpsum = [
+  "lorem ipsum",
   "Grapefruits are energetic elephants. We can assume that any instance of a lion can be construed as a philosophical panda. We can assume that any instance of a persimmon can be construed as a vivacious deer.",
   "What we dont know for sure is whether or not a snake is a goats fish. A steadfast prunes rat comes with it the thought that the eager blackberry is a kangaroo.",
   "The first elated puppy is, in its own way, a horse. Nowhere is it disputed that one cannot separate goats from energetic pears. A cheetah sees a fish as an ambitious cat.",

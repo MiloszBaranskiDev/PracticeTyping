@@ -6,16 +6,25 @@ interface Props {
   clickedLetter: string | null;
   letterIndex: number;
   updateLetterIndex: (arg0: number) => void;
+  updateShowResult: (arg0: boolean) => void;
+  updatePointAccuracy: (arg0: string) => void;
+  updatePercentageAccuracy: (arg0: string) => void;
 }
 
 const Text: React.FC<Props> = ({
   clickedLetter,
   letterIndex,
   updateLetterIndex,
+  updateShowResult,
+  updatePointAccuracy,
+  updatePercentageAccuracy,
 }) => {
-  const currentText: string = loremIpsum[0];
+  const textDiv = useRef(null as any);
   const currentWordDiv = useRef(null as any);
+
+  const currentText: string = loremIpsum[0];
   const words: string[] = currentText.split(" ");
+
   const [wordIndex, updateWordIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -28,12 +37,15 @@ const Text: React.FC<Props> = ({
     }
   }, [letterIndex]);
 
-  if (
-    wordIndex === words.length - 1 &&
-    letterIndex === words[wordIndex].length
-  ) {
-    console.log("end");
-  }
+  useEffect(() => {
+    if (
+      wordIndex === words.length - 1 &&
+      letterIndex === words[wordIndex].length
+    ) {
+      saveAccuracy();
+      updateShowResult(true);
+    }
+  }, [wordIndex, letterIndex]);
 
   useEffect(() => {
     if (clickedLetter !== null && clickedLetter !== "") {
@@ -58,8 +70,23 @@ const Text: React.FC<Props> = ({
     }
   }, [clickedLetter]);
 
+  const saveAccuracy = () => {
+    const allLettersQuantity: number =
+      document.querySelectorAll(".text__letter").length;
+    const correctLettersQuantity: number = document.querySelectorAll(
+      ".text__letter--correct"
+    ).length;
+
+    updatePointAccuracy(
+      String(correctLettersQuantity + "/" + allLettersQuantity)
+    );
+    updatePercentageAccuracy(
+      String((correctLettersQuantity / allLettersQuantity) * 100 + "%")
+    );
+  };
+
   return (
-    <div className="text">
+    <div className="text" ref={textDiv}>
       {words.map((word, i) => (
         <div
           key={word + i}

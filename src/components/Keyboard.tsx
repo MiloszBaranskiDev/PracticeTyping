@@ -19,10 +19,10 @@ const Keyboard: React.FC<Props> = ({
     keys: object;
     keyboardRowsDOM: HTMLDivElement;
   }) => {
-    const rows = keys.keyboardRowsDOM.childNodes;
+    const rows: NodeListOf<ChildNode> = keys.keyboardRowsDOM.childNodes;
     rows.forEach((row) => {
-      const rowItems = row.childNodes;
-      rowItems.forEach((rowItem) => {
+      const rowItems: NodeListOf<ChildNode> = row.childNodes;
+      rowItems.forEach((rowItem: ChildNode) => {
         updateKeys((oldArr: HTMLDivElement[] | []) => [...oldArr, rowItem]);
       });
     });
