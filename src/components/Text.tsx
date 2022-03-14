@@ -3,10 +3,11 @@ import { loremIpsum } from "../LoremIpsum";
 import "styles/components/Text.scss";
 
 interface Props {
-  clickedLetter: string | null;
+  clickedLetter: string;
   letterIndex: number;
   updateLetterIndex: (arg0: number) => void;
   updateShowResult: (arg0: boolean) => void;
+  updateTextAccuracy: (arg0: HTMLDivElement) => void;
   updatePointAccuracy: (arg0: string) => void;
   updatePercentageAccuracy: (arg0: string) => void;
 }
@@ -16,6 +17,7 @@ const Text: React.FC<Props> = ({
   letterIndex,
   updateLetterIndex,
   updateShowResult,
+  updateTextAccuracy,
   updatePointAccuracy,
   updatePercentageAccuracy,
 }) => {
@@ -36,16 +38,6 @@ const Text: React.FC<Props> = ({
       updateLetterIndex(0);
     }
   }, [letterIndex]);
-
-  useEffect(() => {
-    if (
-      wordIndex === words.length - 1 &&
-      letterIndex === words[wordIndex].length
-    ) {
-      saveAccuracy();
-      updateShowResult(true);
-    }
-  }, [wordIndex, letterIndex]);
 
   useEffect(() => {
     if (clickedLetter !== null && clickedLetter !== "") {
@@ -69,6 +61,19 @@ const Text: React.FC<Props> = ({
       }
     }
   }, [clickedLetter]);
+
+  useEffect(() => {
+    if (
+      wordIndex === words.length - 1 &&
+      letterIndex === words[wordIndex].length
+    ) {
+      setTimeout(() => {
+        saveAccuracy();
+        updateTextAccuracy(textDiv.current);
+        updateShowResult(true);
+      }, 200);
+    }
+  }, [wordIndex, letterIndex]);
 
   const saveAccuracy = () => {
     const allLettersQuantity: number =

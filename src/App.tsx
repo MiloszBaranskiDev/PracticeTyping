@@ -6,9 +6,12 @@ import "./App.scss";
 
 const App: React.FC = () => {
   const [showResult, updateShowResult] = useState<boolean>(false);
+
+  const [textAccuracy, updateTextAccuracy] = useState<Node | null>(null);
   const [pointAccuracy, updatePointAccuracy] = useState<string>("");
   const [percentageAccuracy, updatePercentageAccuracy] = useState<string>("");
-  const [clickedLetter, updateClickedLetter] = useState<string | null>(null);
+
+  const [clickedLetter, updateClickedLetter] = useState<string>("");
   const [letterIndex, updateLetterIndex] = useState<number>(0);
 
   return (
@@ -20,6 +23,7 @@ const App: React.FC = () => {
             letterIndex={letterIndex}
             updateLetterIndex={updateLetterIndex}
             updateShowResult={updateShowResult}
+            updateTextAccuracy={updateTextAccuracy}
             updatePointAccuracy={updatePointAccuracy}
             updatePercentageAccuracy={updatePercentageAccuracy}
           />
@@ -30,6 +34,7 @@ const App: React.FC = () => {
         </>
       ) : (
         <Result
+          textAccuracy={textAccuracy}
           pointAccuracy={pointAccuracy}
           percentageAccuracy={percentageAccuracy}
         />
