@@ -37,6 +37,7 @@ const Text: React.FC<Props> = ({
       updateWordIndex((prevWordIndex: number) => prevWordIndex + 1);
       updateLetterIndex(0);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [letterIndex]);
 
   useEffect(() => {
@@ -60,6 +61,7 @@ const Text: React.FC<Props> = ({
         previousLetterSpan.classList.add("text__letter--incorrect");
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clickedLetter]);
 
   useEffect(() => {
@@ -73,6 +75,7 @@ const Text: React.FC<Props> = ({
         updateShowResult(true);
       }, 200);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wordIndex, letterIndex]);
 
   const saveAccuracy = () => {
@@ -86,7 +89,9 @@ const Text: React.FC<Props> = ({
       String(correctLettersQuantity + "/" + allLettersQuantity)
     );
     updatePercentageAccuracy(
-      String((correctLettersQuantity / allLettersQuantity) * 100 + "%")
+      String(
+        ((correctLettersQuantity / allLettersQuantity) * 100).toFixed(2) + "%"
+      )
     );
   };
 

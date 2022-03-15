@@ -1,0 +1,50 @@
+@import "styles/variables";
+
+.result {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &__heading {
+    color: $gray--third;
+  }
+  &__text {
+    margin: 25px 0;
+    padding: 30px;
+    background-color: $gray--first;
+    box-shadow: $shadow--second;
+    border-radius: 40px;
+    width: 90%;
+    max-width: 480px;
+    .text {
+      &__word {
+        letter-spacing: unset;
+        font-size: 16px;
+      }
+    }
+  }
+  &__points,
+  &__percentage {
+    color: $gray--third;
+    font-size: 20px;
+    text-align: center;
+  }
+  &__btn {
+    margin-top: 25px;
+    text-transform: uppercase;
+    background-color: $primary;
+    cursor: pointer;
+    color: white;
+    padding: 8px 18px;
+    font-size: 16px;
+    border: none;
+    border-radius: 218px;
+    font-family: $font;
+    box-shadow: $shadow--second;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: $primary--dark;
+    }
+  }
+}

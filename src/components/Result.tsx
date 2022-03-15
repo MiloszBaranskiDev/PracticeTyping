@@ -1,5 +1,6 @@
 import React from "react";
 import DOMPurify from "dompurify";
+import "styles/components/Result.scss";
 
 interface Props {
   textAccuracy: Node | null;
@@ -21,8 +22,23 @@ const Result: React.FC<Props> = ({
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(textAccuracy) }}
         ></div>
       )}
-      <p className="result__points">Points: {pointAccuracy}</p>
-      <p className="result__percentage">Percentage: {percentageAccuracy}</p>
+      <div className="result__stats">
+        <p className="result__points">
+          Points: <strong>{pointAccuracy}</strong>
+        </p>
+        <p className="result__percentage">
+          Percentage: <strong>{percentageAccuracy}</strong>
+        </p>
+      </div>
+      <button
+        type="button"
+        className="result__btn"
+        onClick={() => {
+          window.location.reload();
+        }}
+      >
+        Restart
+      </button>
     </div>
   );
 };
