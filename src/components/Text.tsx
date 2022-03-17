@@ -24,7 +24,13 @@ const Text: React.FC<Props> = ({
   const textDiv = useRef(null as any);
   const currentWordDiv = useRef(null as any);
 
-  const currentText: string = loremIpsum[0];
+  const [loremIndex, randomLoremIndex] = useState<number>(0);
+  useEffect(() => {
+    const loremLength: number = loremIpsum.length - 1;
+    randomLoremIndex(Math.floor(Math.random() * (loremLength - 0 + 1) + 0));
+  }, []);
+
+  const currentText: string = loremIpsum[loremIndex];
   const words: string[] = currentText.split(" ");
 
   const [wordIndex, updateWordIndex] = useState<number>(0);
