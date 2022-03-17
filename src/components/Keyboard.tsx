@@ -39,8 +39,13 @@ const Keyboard: React.FC<Props> = ({
   }, [keys]);
 
   useEffect(() => {
-    window.addEventListener("keyup", (e: { key: string }) => {
-      if (keysStrings !== null && e.key.length === 1 && e.key.match(/[a-z]/i)) {
+    window.addEventListener("keyup", (e: { key: string; code: string }) => {
+      if (
+        keysStrings !== null &&
+        e.code !== "Space" &&
+        e.key.length === 1 &&
+        e.key.match(/[a-z, ",", "."]/i)
+      ) {
         const clickedKeyIndex: number = keysStrings.indexOf(e.key);
         updateLetterIndex((prevLetterIndex: any) => prevLetterIndex + 1);
         keyAnimation(clickedKeyIndex);
@@ -50,6 +55,7 @@ const Keyboard: React.FC<Props> = ({
         updateClickedLetter("");
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keysStrings]);
 
   const keyAnimation = (index: number) => {

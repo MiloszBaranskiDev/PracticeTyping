@@ -26,7 +26,7 @@ const Text: React.FC<Props> = ({
 
   const getRandomLoremIndex = (exclude: number) => {
     const loremLength: number = loremIpsum.length - 1;
-    let randomIndex: number | void = Math.floor(
+    let randomIndex: number = Math.floor(
       Math.random() * (loremLength - 0 + 1) + 0
     );
 
