@@ -63,7 +63,7 @@ const Keyboard: React.FC<Props> = ({
       keys[index].classList.add("currentKey");
       setTimeout(() => {
         keys[index].classList.remove("currentKey");
-      }, 100);
+      }, 50);
     }
   };
 
