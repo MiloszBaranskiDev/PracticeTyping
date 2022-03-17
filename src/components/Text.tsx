@@ -24,11 +24,32 @@ const Text: React.FC<Props> = ({
   const textDiv = useRef(null as any);
   const currentWordDiv = useRef(null as any);
 
+  const getRandomLoremIndex = (exclude: number) => {
+    const loremLength: number = loremIpsum.length - 1;
+    let randomIndex: number | void = Math.floor(
+      Math.random() * (loremLength - 0 + 1) + 0
+    );
+
+    if (randomIndex === exclude) {
+      getRandomLoremIndex(exclude);
+    } else {
+      randomLoremIndex(randomIndex);
+    }
+  };
+
   const [loremIndex, randomLoremIndex] = useState<number>(0);
   useEffect(() => {
-    const loremLength: number = loremIpsum.length - 1;
-    randomLoremIndex(Math.floor(Math.random() * (loremLength - 0 + 1) + 0));
+    const previousLoremIndex: number = Number(
+      localStorage.getItem("loremIndex")
+    );
+
+    getRandomLoremIndex(previousLoremIndex);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("loremIndex", JSON.stringify(loremIndex));
+  }, [loremIndex]);
 
   const currentText: string = loremIpsum[loremIndex];
   const words: string[] = currentText.split(" ");
