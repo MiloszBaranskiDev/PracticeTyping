@@ -14,10 +14,13 @@
   &__letter {
     transition: color 0.12s;
     &--incorrect {
-      color: #c23616;
+      color: $red;
     }
     &--correct {
       color: $primary;
+    }
+    &--active {
+      border-bottom: 2px solid $primary;
     }
   }
 }

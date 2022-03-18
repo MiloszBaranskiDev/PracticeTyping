@@ -42,7 +42,6 @@ const Text: React.FC<Props> = ({
     const previousLoremIndex: number = Number(
       localStorage.getItem("loremIndex")
     );
-
     getRandomLoremIndex(previousLoremIndex);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

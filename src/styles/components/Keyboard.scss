@@ -2,7 +2,6 @@
 
 .keyboard {
   width: 100%;
-  max-width: 1040px;
   .react-simple-keyboard {
     margin-left: auto;
     margin-right: auto;
@@ -26,8 +25,8 @@
       color: $gray--third;
       background-color: $gray--first;
       border-radius: 50%;
-      height: 60px;
-      width: 60px;
+      height: 50px;
+      width: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -35,6 +34,10 @@
       border-bottom: 1px solid $gray--second;
       margin-right: 16px;
       transition: 0.12s ease;
+      @media (min-width: 1140px) {
+        width: 60px;
+        height: 60px;
+      }
       &:last-child {
         margin-right: 0;
       }
