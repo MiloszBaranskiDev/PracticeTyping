@@ -1,4 +1,7 @@
+![PracticeTyping_image_1](https://user-images.githubusercontent.com/66494943/159097160-59df54c3-1a13-4c4b-98f1-0172a83b0eb9.png)
+
 # PracticeTyping
+
 An app for practising fast typing on the keyboard. The application displays a random text that must be written by the user. Each key clicked is checked for correctness, on this basis the letter is styled. After completing the entire text, the user gets point and percentage statistics along with a preview of the written text.
 
 [Live demo](https://react-practice-typing.netlify.app)
@@ -15,5 +18,3 @@ An app for practising fast typing on the keyboard. The application displays a ra
   2. ```cd PracticeTyping```
   3. ```npm i```
   4. ```npm start```
-
-
