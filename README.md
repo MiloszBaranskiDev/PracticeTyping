@@ -5,9 +5,8 @@ An app for practising fast typing on the keyboard. The application displays a ra
 
 ## Stack
 
-- React
+- React with TypeScript
 - react-simple-keyboard
-- TypeScript
 - SCSS
 
 ## Installation
