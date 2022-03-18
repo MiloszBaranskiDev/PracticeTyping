@@ -1,7 +1,7 @@
 # PracticeTyping
 An app for practising fast typing on the keyboard. The application displays a random text that must be written by the user. Each key clicked is checked for correctness, on this basis the letter is styled. After completing the entire text, the user gets point and percentage statistics along with a preview of the written text.
 
-[Live demo]()
+[Live demo](https://react-practice-typing.netlify.app)
 
 ## Stack
 
