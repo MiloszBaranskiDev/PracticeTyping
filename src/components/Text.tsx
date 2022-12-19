@@ -21,8 +21,12 @@ const Text: React.FC<Props> = ({
   updatePointAccuracy,
   updatePercentageAccuracy,
 }) => {
-  const textDiv = useRef(null as any);
-  const currentWordDiv = useRef(null as any);
+  const [loremIndex, randomLoremIndex] = useState<number>(0);
+  const [wordIndex, updateWordIndex] = useState<number>(0);
+
+  const textDiv = React.useRef() as React.MutableRefObject<HTMLDivElement>;
+  const currentWordDiv =
+    React.useRef() as React.MutableRefObject<HTMLDivElement>;
 
   const getRandomLoremIndex = (exclude: number) => {
     const loremLength: number = loremIpsum.length - 1;
@@ -37,12 +41,8 @@ const Text: React.FC<Props> = ({
     }
   };
 
-  const [loremIndex, randomLoremIndex] = useState<number>(0);
   useEffect(() => {
-    const previousLoremIndex: number = Number(
-      localStorage.getItem("loremIndex")
-    );
-    getRandomLoremIndex(previousLoremIndex);
+    getRandomLoremIndex(Number(localStorage.getItem("loremIndex")));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -50,10 +50,7 @@ const Text: React.FC<Props> = ({
     localStorage.setItem("loremIndex", JSON.stringify(loremIndex));
   }, [loremIndex]);
 
-  const currentText: string = loremIpsum[loremIndex];
-  const words: string[] = currentText.split(" ");
-
-  const [wordIndex, updateWordIndex] = useState<number>(0);
+  const words: string[] = loremIpsum[loremIndex].split(" ");
 
   useEffect(() => {
     if (
@@ -70,15 +67,16 @@ const Text: React.FC<Props> = ({
     if (clickedLetter !== null && clickedLetter !== "") {
       let index: number = letterIndex - 1;
       let letters: string[] = Array.from(words[wordIndex]);
-      let previousLetterSpan: HTMLSpanElement =
-        currentWordDiv.current.childNodes[index];
+      let previousLetterSpan: Element = currentWordDiv.current.childNodes[
+        index
+      ] as Element;
 
       if (letters[letterIndex - 1] === undefined) {
         letters = Array.from(words[wordIndex - 1]);
         index = letters.length - 1;
-        previousLetterSpan =
-          currentWordDiv.current.parentNode.childNodes[wordIndex - 1]
-            .childNodes[words[wordIndex - 1].length - 1];
+        previousLetterSpan = currentWordDiv.current.parentNode!.childNodes[
+          wordIndex - 1
+        ].childNodes[words[wordIndex - 1].length - 1] as Element;
       }
 
       if (letters[index].toLowerCase() === clickedLetter) {
@@ -107,6 +105,7 @@ const Text: React.FC<Props> = ({
   const saveAccuracy = () => {
     const allLettersQuantity: number =
       document.querySelectorAll(".text__letter").length;
+
     const correctLettersQuantity: number = document.querySelectorAll(
       ".text__letter--correct"
     ).length;
@@ -114,6 +113,7 @@ const Text: React.FC<Props> = ({
     updatePointAccuracy(
       String(correctLettersQuantity + "/" + allLettersQuantity)
     );
+
     updatePercentageAccuracy(
       String(
         ((correctLettersQuantity / allLettersQuantity) * 100).toFixed(2) + "%"
