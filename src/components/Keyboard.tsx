@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import Keys from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 import "styles/components/Keyboard.scss";
 
 interface Props {
   updateClickedLetter: (arg0: string) => void;
-  updateLetterIndex: (prevLetterIndex: any) => void;
+  updateLetterIndex: Dispatch<SetStateAction<number>>;
 }
 
 const Keyboard: React.FC<Props> = ({
@@ -29,13 +29,8 @@ const Keyboard: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    if (keys.length > 0) {
-      const arr: string[] = [];
-      keys.forEach((key: HTMLDivElement) => {
-        arr.push(key.innerText);
-      });
-      updateKeysStrings(arr);
-    }
+    if (keys.length > 0)
+      updateKeysStrings(keys.map((key: HTMLDivElement) => key.innerText));
   }, [keys]);
 
   useEffect(() => {
@@ -46,9 +41,8 @@ const Keyboard: React.FC<Props> = ({
         e.key.length === 1 &&
         e.key.match(/[a-z, ",", "."]/i)
       ) {
-        const clickedKeyIndex: number = keysStrings.indexOf(e.key);
-        updateLetterIndex((prevLetterIndex: any) => prevLetterIndex + 1);
-        keyAnimation(clickedKeyIndex);
+        updateLetterIndex((prevLetterIndex: number) => prevLetterIndex + 1);
+        keyAnimation(keysStrings.indexOf(e.key));
         updateClickedLetter(e.key.toLowerCase());
 
         // fix the problem with not updating the state when the key is the same as the previous one
